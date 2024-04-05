@@ -8,6 +8,15 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathName = usePathname();
+  const pathLocation = pathName.split("/")[2];
+
+  console.log({
+    pathLocation,
+    pathName,
+    value:
+      pathName === "dashboard/products/1" &&
+      pathName.includes(pathLocation, 11),
+  });
 
   return (
     <div className="flex flex-col gap-5 pt-4 sticky min-h-screen">
@@ -35,7 +44,10 @@ const Sidebar = () => {
                 <Link key={item.title} href={item.path}>
                   <div
                     className={`flex gap-2 items-center pl-3 py-3 my-2 rounded-lg hover:bg-[#2e374a] ${
-                      pathName === item.path ? "bg-[#2e374a]" : ""
+                      pathName === item.path ||
+                      pathLocation == item.path.split("/")[2]
+                        ? "bg-[#2e374a]"
+                        : ""
                     }`}
                   >
                     {item.icon}

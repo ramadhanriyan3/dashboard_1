@@ -1,6 +1,6 @@
 import Card from "@/components/ui/Card";
 import Chart from "@/components/ui/Chart";
-import Transactions from "../../components/transactions/Transaction";
+import LatestTransactions from "../../components/transactions/Transaction";
 
 const Dashboard = () => {
   return (
@@ -10,7 +10,7 @@ const Dashboard = () => {
         <Card />
         <Card />
       </div>
-      <Transactions />
+      <LatestTransactions />
       <Chart />
     </div>
   );

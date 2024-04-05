@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Transactions = () => {
+const LatestTransactions = () => {
   return (
     <div className="bg-soft1 p-5 rounded-lg">
       <h2 className="mb-5 font-semibold text-soft2 text-lg">
@@ -61,4 +61,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default LatestTransactions;
