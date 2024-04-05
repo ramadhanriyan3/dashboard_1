@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { userData } from "@/lib/dummyData";
 
-const UserById = () => {
+const UserById = ({ params }: { params: { id: string } }) => {
+  const user = userData.find((item) => item.id === params.id);
+
   return (
     <div className="bg-soft1 mr-5 rounded-lg p-5">
       <form name="product-form" action="post" className="flex flex-col gap-5">
@@ -25,6 +28,7 @@ const UserById = () => {
                 id="Username"
                 placeholder="Username"
                 className="outline-none bg-primary p-3 rounded-sm"
+                defaultValue={user!.name}
               />
               <div className="flex flex-col gap-3 justify-start w-full">
                 <label htmlFor="Email" className="font-bold">
@@ -34,6 +38,7 @@ const UserById = () => {
                   type="email"
                   name="Email"
                   id="Email"
+                  defaultValue={user!.email}
                   placeholder="Email"
                   className="outline-none bg-primary p-3 rounded-sm"
                 />
@@ -71,10 +76,11 @@ const UserById = () => {
                 name="role"
                 id="role"
                 className="outline-none bg-primary p-3 rounded-sm text-[18px]"
+                defaultValue={user!.role}
               >
                 <option value="">Choose a Role</option>
                 <option value="admin">Admin</option>
-                <option value="super admin">Super Admin</option>
+                <option value="user">User</option>
               </select>
               <div className="flex flex-col gap-3 justify-start w-full">
                 <label htmlFor="status" className="font-bold">
@@ -84,10 +90,11 @@ const UserById = () => {
                   name="status"
                   id="status"
                   className="outline-none bg-primary p-3 rounded-sm text-[18px]"
+                  defaultValue={user!.status}
                 >
                   <option value="">Choose a Status</option>
-                  <option value="electronic">Active</option>
-                  <option value="kitchen">Non Active</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
                 </select>
               </div>
             </div>

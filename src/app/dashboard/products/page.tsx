@@ -5,6 +5,8 @@ import Link from "next/link";
 import Pagination from "@/components/ui/Pagination";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { productData } from "@/lib/dummyData";
+import { formatDate } from "@/lib/globalFunction";
 
 const Products = () => {
   const router = useRouter();
@@ -40,34 +42,41 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="py-3">
-              <div className="flex gap-3 items-center">
-                <Image
-                  src={"/noproduct.jpg"}
-                  alt="ava"
-                  width={30}
-                  height={30}
-                  className="rounded-[50%] object-cover"
-                />
-                <p>Samsung A51</p>
-              </div>
-            </td>
-            <td>Samsung Handphone</td>
-            <td>5000000</td>
-            <td>29/03/2024</td>
-            <td>102</td>
-            <td>
-              <Link href={"/"} className=" mr-3">
-                <button className="text-white bg-teal-700 px-3 rounded-md">
-                  view
-                </button>
-              </Link>
-              <button className="text-white bg-red-700 px-3 rounded-md">
-                delete
-              </button>
-            </td>
-          </tr>
+          {productData.map((product) => (
+            <>
+              <tr key={product.id}>
+                <td className="py-3">
+                  <div className="flex gap-3 items-center">
+                    <Image
+                      src={"/noproduct.jpg"}
+                      alt="ava"
+                      width={30}
+                      height={30}
+                      className="rounded-[50%] object-cover"
+                    />
+                    <p>{product.title}</p>
+                  </div>
+                </td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>{formatDate(product.createdAt)}</td>
+                <td>{product.stock}</td>
+                <td>
+                  <Link
+                    href={`/dashboard/products/${product.id}`}
+                    className=" mr-3"
+                  >
+                    <button className="text-white bg-teal-700 px-3 rounded-md">
+                      view
+                    </button>
+                  </Link>
+                  <button className="text-white bg-red-700 px-3 rounded-md">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
       <Pagination />

@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MdSearch } from "react-icons/md";
+import { userData } from "@/lib/dummyData";
+import { formatDate } from "@/lib/globalFunction";
 
 const Users = () => {
   const router = useRouter();
@@ -38,34 +40,38 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="py-3">
-              <div className="flex gap-3 items-center">
-                <Image
-                  src={"/noavatar.png"}
-                  alt="ava"
-                  width={30}
-                  height={30}
-                  className="rounded-[50%] object-cover"
-                />
-                <p>User 1</p>
-              </div>
-            </td>
-            <td>ramadhann@gmail.com</td>
-            <td>29/03/2024</td>
-            <td>Admin</td>
-            <td>Active</td>
-            <td>
-              <Link href={"/"} className=" mx-3">
-                <button className="text-white bg-teal-700 px-3 rounded-md">
-                  view
-                </button>
-              </Link>
-              <button className="text-white bg-red-700 px-3 rounded-md">
-                delete
-              </button>
-            </td>
-          </tr>
+          {userData.map((user) => (
+            <>
+              <tr>
+                <td className="py-3">
+                  <div className="flex gap-3 items-center">
+                    <Image
+                      src={"/noavatar.png"}
+                      alt="ava"
+                      width={30}
+                      height={30}
+                      className="rounded-[50%] object-cover"
+                    />
+                    <p>{user.name}</p>
+                  </div>
+                </td>
+                <td>{user.email}</td>
+                <td>{formatDate(user.createdAt)}</td>
+                <td>{user.role}n</td>
+                <td>{user.status}</td>
+                <td>
+                  <Link href={`/dashboard/users/${user.id}`} className=" mx-3">
+                    <button className="text-white bg-teal-700 px-3 rounded-md">
+                      view
+                    </button>
+                  </Link>
+                  <button className="text-white bg-red-700 px-3 rounded-md">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
       <Pagination />
